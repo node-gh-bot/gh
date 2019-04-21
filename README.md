@@ -24,7 +24,7 @@
     -   [Repo](#repo)
     -   [Gists](#gists)
     -   [User](#user)
-    -   [Alias](#alias)
+    -   [Milestone](#milestone)
 -   [Config](#config)
 -   [Plugins](#plugins)
 -   [Team](#team)
@@ -52,7 +52,7 @@
 
 -   We support the node versions that the Node.js organization supports which as of now is Node v6 & up.
 
-<p><img src="https://raw.githubusercontent.com/nodejs/Release/master/schedule.png" alt="LTS Schedule"/></p>
+<p><img src="https://github.com/nodejs/Release/blob/master/schedule.svg" alt="LTS Schedule"/></p>
 
 ## Available commands
 
@@ -112,16 +112,22 @@ gh pull-request
 | `-m`, `--me`       | _Optional_   | `Boolean`                                                          |
 | `-d`, `--detailed` | _Optional_   | `Boolean`                                                          |
 | `--direction`      | _Optional_   | [`asc`, `desc`]                                                    |
+| `--date`           | _Optional_   | `String`                                                           |
 | `-b`, `--branch`   | _Optional_   | `String`                                                           |
 | `--remote`         | _Optional_   | `String`                                                           |
 | `-r`, `--repo`     | _Optional_   | `String`                                                           |
 | `--sort`           | _Optional_   | [`created`, `updated`, `popularity`, `long-running`, `complexity`] |
 | `-S`, `--state`    | _Optional_   | [`open`, `closed`]                                                 |
 | `-u`, `--user`     | _Optional_   | `String`                                                           |
+| `--link`           | _Optional_   | `Boolean`                                                          |
+
+`user` is owner of the repository, it is the authenticated user by default.
+`remote` is the name of the remote configuration in a git directory, i.e. origin, upstream. Therefore, it only makes sense when this command is run in a git directory.
 
 #### Examples
 
 -   **Shortcut** for listing open pull requests for the current repository.
+-   To pretty print output in a table add `"pretty_print": true` to your `~/.gh-json` config
 
 ```
 gh pr
@@ -149,6 +155,12 @@ gh pr --list --all --org github
 
 ```
 gh pr --list --me
+```
+
+-   List open pull requests in node-gh/gh repository.
+
+```
+gh pr --list --user node-gh --repo gh
 ```
 
 -   List open pull requests with link and content.
@@ -179,6 +191,18 @@ gh pr --list --sort long-running --direction asc
 
 ```
 gh pr --list --sort complexity
+```
+
+-   List open pull requests with their link
+
+```
+gh pr --list --link
+```
+
+-   List open pull requests with a formatted date (_Any string that the moment library's formatter accepts should work: https://momentjs.com/docs/#/displaying/format/_).
+
+```
+gh pr --list --date "dddd, MMMM Do YYYY, h:mm:ss a"
 ```
 
 ### 3. Fetch
@@ -227,7 +251,7 @@ Omitting `--number` will try to guess the pull number from branch name e.g. `pr-
 
 #### Examples
 
--   Merge or rebase pull request into a branch.
+-   Merge or rebase pull request into a local branch.
 
 ```
 gh pr 1 --fetch --merge
@@ -394,6 +418,7 @@ gh notification
 | `--remote`       | _Optional_   | `String`  |
 | `-r`, `--repo`   | _Optional_   | `String`  |
 | `-u`, `--user`   | _Optional_   | `String`  |
+| `--date`         | _Optional_   | `String`  |
 
 #### Examples
 
@@ -407,6 +432,12 @@ gh nt
 
 ```
 gh nt --latest --user eduardolundgren --repo node-gh
+```
+
+-   Diplay notifications with a formatted date (_Any string that the moment library's formatter accepts should work: https://momentjs.com/docs/#/displaying/format/_).
+
+```
+gh nt --date "dddd, MMMM Do YYYY, h:mm:ss a"
 ```
 
 ### 2. Watch
@@ -447,7 +478,7 @@ gh issue
 | `-N`, `--new`      | **Required** | `Boolean` |
 | `-t`, `--title`    | **Required** | `String`  |
 | `-A`, `--assignee` | _Optional_   | `String`  |
-| `-L`, `--label`    | _Optional_   | `String`  |
+| `-L`, `--labels`   | _Optional_   | `String`  |
 | `-m`, `--message`  | _Optional_   | `String`  |
 | `--remote`         | _Optional_   | `String`  |
 | `-r`, `--repo`     | _Optional_   | `String`  |
@@ -470,7 +501,7 @@ gh is --new --title 'Node GH rocks!' --message 'Body with **Markdown** support' 
 -   Create a new issue with labels.
 
 ```
-gh is --new --title 'Node GH rocks!' --label bug,question,test
+gh is --new --title 'Node GH rocks!' --labels bug,question,test
 ```
 
 -   Create a new issue and assign it to someone.
@@ -553,8 +584,9 @@ gh is 1 --close --user eduardolundgren
 | `-l`, `--list`      | **Required** | `Boolean`            |
 | `-a`, `--all`       | _Optional_   | `Boolean`            |
 | `-A`, `--assignee`  | _Optional_   | `String`             |
+| `--date`            | _Optional_   | `String`             |
 | `-d`, `--detailed`  | _Optional_   | `Boolean`            |
-| `-L`, `--label`     | _Optional_   | `String`             |
+| `-L`, `--labels`    | _Optional_   | `String`             |
 | `-M`, `--milestone` | _Optional_   | [`Number`, `String`] |
 | `--remote`          | _Optional_   | `String`             |
 | `-r`, `--repo`      | _Optional_   | `String`             |
@@ -593,6 +625,12 @@ gh is --list --detailed
 gh is --list --state closed
 ```
 
+-   List issues with a formatted date (_Any string that the moment library's formatter accepts should work: https://momentjs.com/docs/#/displaying/format/_).
+
+```
+gh is --list --date "dddd, MMMM Do YYYY, h:mm:ss a"
+```
+
 -   List issues filtered by milestone.
 
 ```
@@ -602,7 +640,7 @@ gh is --list --milestone 1
 -   List issues that contains labels `todo` and `bug`.
 
 ```
-gh is --list --label todo,bug
+gh is --list --labels todo,bug
 ```
 
 -   List all issues on a certain repository.
@@ -738,6 +776,7 @@ gh re --browser --user eduardolundgren --repo node-gh
 | `-d`, `--detailed` | _Optional_   | `Boolean`                                       |
 | `-u`, `--user`     | _Optional_   | `String`                                        |
 | `-t`, `--type`     | _Optional_   | [`all`, `owner`, `public`, `private`, `member`] |
+| `--date`           | _Optional_   | `String`                                        |
 
 #### Examples
 
@@ -757,6 +796,12 @@ gh re --list --type private
 
 ```
 gh re --list --user zenorocha
+```
+
+-   List open repositories with a formatted date (_Any string that the moment library's formatter accepts should work: https://momentjs.com/docs/#/displaying/format/_).
+
+```
+gh re --list --detailed --date "dddd, MMMM Do YYYY, h:mm:ss a"
 ```
 
 ### 3. Create
@@ -993,6 +1038,7 @@ gh gi --browser --id 5991877
 | -------------- | ------------ | --------- |
 | `-l`, `--list` | **Required** | `Boolean` |
 | `-u`, `--user` | _Optional_   | `String`  |
+| `--date`       | _Optional_   | `String`  |
 
 #### Examples
 
@@ -1006,6 +1052,12 @@ gh gi --list
 
 ```
 gh gi --list --user brunocoelho
+```
+
+-   List gists with a formatted date (_Any string that the moment library's formatter accepts should work: https://momentjs.com/docs/#/displaying/format/_).
+
+```
+gh gi --list --date "dddd, MMMM Do YYYY, h:mm:ss a"
 ```
 
 ### 3. Create
@@ -1108,66 +1160,47 @@ gh user --logout
 gh user --whoami
 ```
 
-## Alias
+## Milestones
 
 ```
-gh alias
+gh milestone
 ```
 
-> **Alias:** `gh al`
+> **Alias:** `gh ms`
 
 ### 1. List
 
-| Option         | Usage        | Type      |
-| -------------- | ------------ | --------- |
-| `-l`, `--list` | **Required** | `Boolean` |
+| Option                 | Usage        | Type      |
+| ---------------------- | ------------ | --------- |
+| `-l`, `--list`         | **Required** | `Boolean` |
+| `-u`, `--user`         | _Required_   | `String`  |
+| `-a`, `--all`          | _Required_   | `Boolean` |
+| `-r`, `--repo`         | _Optional_   | `String`  |
+| `-o`, `--organization` | _Optional_   | `String`  |
 
 #### Examples
 
--   **Shortcut** for listing aliases.
+-   **Shortcut** for listing milestones for a specific repo.
 
 ```
-gh alias
+gh ms
 ```
 
--   List aliases.
+-   Listing milestones for a specific repo & user.
 
 ```
-gh alias --list
+gh ms --list --user node-gh --repo gh
 ```
 
-### 2. Add
-
-| Option         | Usage        | Type     |
-| -------------- | ------------ | -------- |
-| `-a`, `--add`  | **Required** | `String` |
-| `-u`, `--user` | **Required** | `String` |
-
-#### Examples
-
--   Create alias for username.
+-   Listing all milestones for a specific organization.
 
 ```
-gh alias --add zeno --user zenorocha
-```
-
-### 3. Remove
-
-| Option           | Usage        | Type     |
-| ---------------- | ------------ | -------- |
-| `-r`, `--remove` | **Required** | `String` |
-
-#### Examples
-
--   Remove alias.
-
-```
-gh alias --remove zeno
+gh ms --list --all --organization node-gh
 ```
 
 ## Config
 
-There are some pretty useful configurations that you can set on [.gh.json](lib/default.gh.json).
+There are some pretty useful configurations that you can set on [.gh.json](default.gh.json).
 This file can be found under home directory _(on MacOSx: `/Users/yourName/.gh.json` on Windows: `C:\\Users\yourName\.gh.json`)_.
 
 You can also set per-project configurations by adding a `.gh.json` file in your project's root folder and overriding existing keys.
@@ -1177,9 +1210,7 @@ You can also set per-project configurations by adding a `.gh.json` file in your 
 ```javascript
 "api": {
     "host": "github.mydomain.com",
-    "protocol": "https",
-    "version": "3.0.0",
-    "pathPrefix": "/api/v3"
+    "protocol": "https"
 }
 ```
 

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`E2E: Milestone Module Test List Milestones \`gh ms --list\` 1`] = `
+"Listing milestones on protoEvangelion/gh
+ Milestone 1 milestone 1 description @open (due in 5 years)
+ Milestone 2 milestone 2 description @open (due in 5 years)
+"
+`;

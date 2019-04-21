@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`E2E: Pull Request Module Test Close PR \`gh pr 50 --close\` 1`] = `
+"Closing pull request #50
+https://github.com/protoEvangelion/gh/pull/50
+"
+`;
+
+exports[`E2E: Pull Request Module Test Comment on PR \`gh pr 50 --comment "Just started reviewing :)"\` 1`] = `
+"Adding comment on pull request #50
+https://github.com/protoEvangelion/gh/pull/50#issuecomment-000000001
+"
+`;
+
+exports[`E2E: Pull Request Module Test Fetch & Rebase PR \`gh pr 55 --fetch --rebase\` 1`] = `
+"Fetching pull request #55 and rebasing into branch octokit
+[hook] gh pr 55 --user protoEvangelion --repo gh --comment 'Just started reviewing :)'
+Adding comment on pull request #55
+https://github.com/protoEvangelion/gh/pull/50#issuecomment-000000001
+"
+`;
+
+exports[`E2E: Pull Request Module Test Fetch PR \`gh pr 55\` 1`] = `
+"Fetching pull request #55 into branch pr-55
+[hook] gh pr 55 --user protoEvangelion --repo gh --comment 'Just started reviewing :)'
+Adding comment on pull request #55
+https://github.com/protoEvangelion/gh/pull/50#issuecomment-000000001
+"
+`;
+
+exports[`E2E: Pull Request Module Test Get PR Info \`gh pr --info 50\` 1`] = `
+"#50 pr2 @protoEvangelion (in 4 years)
+"
+`;
+
+exports[`E2E: Pull Request Module Test List Detailed PRs \`gh pr --detailed\` 1`] = `
+"Listing open pull requests on protoEvangelion/gh
+protoEvangelion/gh
+Branch: master (1)
+┌─────────┬───────────────────────────────────────────────┬─────────────────────┬───────────────┬────────┐
+│    #    │ Details                                       │ Author              │ Opened        │ Status │
+├─────────┼───────────────────────────────────────────────┼─────────────────────┼───────────────┼────────┤
+│   #55   │ Title:                                        │ @protoEvangelion    │ in 4 years    │   ✓    │
+│         │                                               │                     │               │        │
+│         │ pr title                                      │                     │               │        │
+│         │                                               │                     │               │        │
+│         │ Body:                                         │                     │               │        │
+│         │                                               │                     │               │        │
+│         │ pr description                                │                     │               │        │
+│         │                                               │                     │               │        │
+│         │ https://github.com/protoEvangelion/gh/pull/55 │                     │               │        │
+└─────────┴───────────────────────────────────────────────┴─────────────────────┴───────────────┴────────┘
+"
+`;
+
+exports[`E2E: Pull Request Module Test List PRs \`gh pr\` 1`] = `
+"Listing open pull requests on protoEvangelion/gh
+protoEvangelion/gh
+Branch: master (1)
+┌─────────┬───────────────────────────────────────────────┬─────────────────────┬───────────────┬────────┐
+│    #    │ Title                                         │ Author              │ Opened        │ Status │
+├─────────┼───────────────────────────────────────────────┼─────────────────────┼───────────────┼────────┤
+│   #55   │ pr title                                      │ @protoEvangelion    │ in 4 years    │   ✓    │
+└─────────┴───────────────────────────────────────────────┴─────────────────────┴───────────────┴────────┘
+"
+`;
+
+exports[`E2E: Pull Request Module Test Open PR \`gh pr 50 --open\` 1`] = `
+"Opening pull request #50
+https://github.com/protoEvangelion/gh/pull/50
+"
+`;
+
+exports[`E2E: Pull Request Module Test Submit PR \`gh pr -s protoEvangelion -b master -t "pr title" -D "pr description"\` 1`] = `
+"Submitting pull request to @protoEvangelion
+https://github.com/protoEvangelion/gh/pull/97
+[hook] gh pr --browser  --user protoEvangelion --repo gh --number 97
+"
+`;
