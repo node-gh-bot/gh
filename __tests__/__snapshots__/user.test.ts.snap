@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`E2E: User Module Test Generates token end to end without 2fa 1`] = `
+"In order to use GitHub's API, you will need to login with your GitHub account.
+? Enter your GitHub user ? Enter your GitHub user m? Enter your GitHub user my? Enter your GitHub user myu? Enter your GitHub user myus? Enter your GitHub user myuse? Enter your GitHub user myuser? Enter your GitHub user m? Enter your GitHub user my? Enter your GitHub user myp? Enter your GitHub user mypa? Enter your GitHub user mypas? Enter your GitHub user mypass? Enter your GitHub user myuser
+? Enter your GitHub password [input is hidden] ? Enter your GitHub password [hidden]
+Writing GH config /gh/__tests__/auth.json
+Authentication succeed. Token written to global config.
+"
+`;
+
+exports[`E2E: User Module Test List Current User \`gh user\` 1`] = `
+"You're logged in as protoEvangelion
+"
+`;
+
+exports[`E2E: User Module Test Logout Current User \`gh user --logout\` 1`] = `
+"Logging out of user protoEvangelion
+"
+`;
+
+exports[`E2E: User Module Test Show just the current username \`gh user --whoami\` 1`] = `
+"protoEvangelion
+"
+`;

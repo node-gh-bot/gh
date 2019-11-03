@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`E2E: Gist Module Test Create new gist \`gh gi --new hello --content "Hello World!"\` 1`] = `
+"Creating public gist on protoEvangelion
+https://gist.github.com/000000001e9f6422a8d3cd0feda0a3be845d4
+[hook] gh gi --browser  --id 1000
+"
+`;
+
+exports[`E2E: Gist Module Test Delete gists \`gh gi --delete 5250d21093b46bd0665c2e8656d16bd2 --delete 30e5d3c69a6997617ab69d07b733105e\` 1`] = `
+"? Are you sure? This action CANNOT be undone. [y/N] ? Are you sure? This action CANNOT be undone. [y/N] y? Are you sure? This action CANNOT be undone. [y/N] y
+Deleting gist protoEvangelion/5250d21093b46bd0665c2e8656d16bd2
+Successfully deleted gist: 5250d21093b46bd0665c2e8656d16bd2
+Deleting gist protoEvangelion/30e5d3c69a6997617ab69d07b733105e
+Successfully deleted gist: 30e5d3c69a6997617ab69d07b733105e
+"
+`;
+
+exports[`E2E: Gist Module Test Fork a gist \`gh gi --fork 5444883\` 1`] = `
+"Forking gist on protoEvangelion
+https://gist.github.com/c93ab6d93dde5dfa3fe9f0b000000001b1643c
+[hook] gh gi --browser  --id
+"
+`;
+
+exports[`E2E: Gist Module Test List Gists \`gh gi\` 1`] = `
+"Listing gists for protoEvangelion
+protoEvangelion/1000 in 4 years
+Hubspot Form Generator
+https://gist.github.com/000000001f227a2c690e76c6fa2ca5b444de1
+
+protoEvangelion/1004 in 4 years
+Liferay.provide minimal example
+https://gist.github.com/000000001b5c7f25c00095ef73095db0b59cfc
+
+protoEvangelion/1008 in 4 years
+Fix aui adding pre styles
+https://gist.github.com/dfc000000001b8c49c8a97dbc98cf7193
+
+"
+`;
+
+exports[`E2E: Gist Module Test Open gist in browser \`gh gi --browser --id 5444883\` 1`] = `
+"https://gist.github.com/5444883
+"
+`;

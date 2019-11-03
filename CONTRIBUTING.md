@@ -1,18 +1,75 @@
-- [Reporting Bugs](#reporting-bugs)
-- [Testing](#testing)
-- [Committing](#committing)
-  - [Optional Plugins to install for your code editor](#optional-plugins-to-install-for-your-code-editor)
-    - [Prettier (formatter primarily for JS files)](#prettier-formatter-primarily-for-js-files)
-    - [ESlint (linter)](#eslint-linter)
+-   [Writing Code](#writing-code)
+    -   [Setting Up](#setting-up)
+    -   [Committing](#committing)
+    -   [Don't Mutate `options`](#dont-mutate-options)
+    -   [Building](#building)
+    -   [Adding new commands](#adding-new-commands)
+-   [Testing](#testing)
+    -   [Optional Plugins to install for your code editor for a better developer experience](#optional-plugins-to-install-for-your-code-editor-for-a-better-developer-experience)
+        -   [Prettier](#prettier)
+        -   [TSlint (linter)](#tslint-linter)
 
-## Reporting Bugs
+## Writing Code
 
-1.  Verify if your problem is already solved on the latest version
-2.  Search for open issues before opening a new one
-3.  Specify what version you're using `gh --version`
-4.  Print the output of `npm list -g --depth=0 | grep gh`
-5.  Try the command that failed with `--verbose` to print debugging messages
-6.  Report the exit code of the gh process: `echo $?` after termination
+### Setting Up
+
+1.  Remove the installed version from NPM: `[sudo] npm rm -g gh`
+2.  Fork the project and clone it locally: `git clone git@github.com:<your-username>/gh.git`
+3.  Go to the package folder and create a symlink: `[sudo] npm link`
+4.  Then you can run commands normally `gh ...`
+
+### Committing
+
+> Following a commit format allows us to automatically publish new builds via continuous integration
+
+-   Practically commits will end up looking like this:
+
+```
+fix(pull-request): resolves bug where pull request doesn't close
+This happened because we weren't passing the right data to Octokit
+
+fix #123
+```
+
+-   If you are not familiar with this pattern, simply run `npm run commit` which will take you through a helpful interactive semantic commit process
+
+-   If you want more info on the commit process, we follow [Angular's Commit Convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular#readme)
+
+### Don't Mutate `options`
+
+-   We use a variable called `options` throughought our code base which holds core variables like flags that we reuse
+-   We also freeze it for [immutability benefits](https://redux.js.org/faq/immutable-data#what-are-the-benefits-of-immutability) so if you try to mutate it somewhere, it will yell at you
+-   If you need to modify it please use the [immer](https://immerjs.github.io/immer/docs/introduction) pattern:
+
+```javascript
+import { produce } from 'immer'
+
+options = produce(options, draft => {
+    draft.list = true
+})
+```
+
+### Building
+
+Since this is a **TypeScript** project, we have to compile the code before running it.
+
+First, if you haven't already done so, install dependencies and create a sym link:
+
+-   `npm install`
+-   `[sudo] npm link`
+
+To run **incrementally** in watch mode:
+
+-   `npm run dev`
+
+To run **once**:
+
+-   `npm run build`
+
+### Adding new commands
+
+-   Copy and edit the content of [Hello World](https://github.com/node-gh/gh/blob/master/src/cmds/hello.ts) example
+-   Add instructions in [README](https://github.com/node-gh/gh/blob/master/README.md)
 
 ## Testing
 
@@ -21,38 +78,22 @@ Please verify that your tests pass & minimum coverage levels are met when contri
 -   `npm test` Run all tests
 -   `npm run test:watch` Run all tests in watch mode
 -   `npm run test:coverage` Run all tests with coverage
+-   `npm run test pull-request` Run one test
 
-## Committing
-
-1.  Remove the installed version from NPM: `[sudo] npm rm -g gh`
-2.  Fork the project and clone it locally: `git clone git@github.com:<your-username>/gh.git`
-3.  Go to the package folder and create a symlink: `[sudo] npm link`
-4.  Then you can run commands normally `gh ...`
-5.  To commit run `npm run commit` which will take you through a nice interactive semantic commit process
-
--   If you want more info on the commit process, we follow [Angular's Commit Convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular#readme)
-
-Contribute new commands to this project by copying and editing the content of [Hello World](https://github.com/node-gh/gh/blob/master/lib/cmds/hello.js) example.
-
-### Optional Plugins to install for your code editor
+### Optional Plugins to install for your code editor for a better developer experience
 
 -   Even if you don't install these plugins, your commits will automatically be formatted
--   These are only recommendations for a better developer experience
 
-#### Prettier (formatter primarily for JS files)
+#### Prettier
 
-> Prettier is an opinionated code formatter. https://prettier.io/playground/
+> Prettier is an opinionated code formatter
 
--   User Guide: https://github.com/prettier/prettier
--   VS Code Editor Plugin: https://github.com/prettier/prettier-vscode
--   Vim Plugin: https://github.com/prettier/vim-prettier
--   Sublime: https://packagecontrol.io/packages/JsPrettier
+-   [User Guide](https://prettier.io/)
+-   [Editor plugin links](https://prettier.io/docs/en/editors.html)
 
-#### ESlint (linter)
+#### TSlint (linter)
 
-> ESlint is a pluggable linting utility for JavaScript
+> TSlint is a pluggable linting utility for TypeScript
 
--   User Guide: https://eslint.org/docs/user-guide/getting-started#configuration
--   VS Code Editor Plugin: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
--   Vim Plugin: https://github.com/vim-syntastic/syntastic/tree/master/syntax_checkers/javascript
--   Sublime: https://github.com/roadhump/SublimeLinter-eslint
+-   [User Guide](https://palantir.github.io/tslint/)
+-   [Editor plugin links](https://palantir.github.io/tslint/usage/third-party-tools)
